@@ -1,0 +1,4 @@
+<speak>
+  It's the year 2030 A.D.<break time="1000ms"/> Because of global warming, the oceans have warmed so much, the heat has awakened ancient creatures frozen for millions of years. The cities by the sea, are at constant danger both from the rising waters, and angry monsters that, come out of it. 
+<emphasis level="strong">These monsters are bigger and scarier than anything that has ever been seen before.</emphasis>
+</speak>
