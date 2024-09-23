@@ -86,12 +86,12 @@ function addDummy(){
 function addLines() {
 		var material = new LineMaterial( {
 
-		color: 0xffffff,
-		linewidth: 7, // in world units with size attenuation, pixels otherwise
+		color: 0xffff00,
+		linewidth: 2.5, // in world units with size attenuation, pixels otherwise
 		vertexColors: false,
 
 		dashed: false,
-		alphaToCoverage: true,
+		alphaToCoverage: false,
 
 	} );
 
@@ -110,8 +110,8 @@ function addLines() {
 
 function addSkybox(){
 	// image
-	var topColor = "#fcba03";
-	var bottomColor = "#ff0851";
+	var topColor = "#E5DBA4";
+	var bottomColor = "#CFC17B";
 	var textureTop = new THREE.Texture( generateTexture(topColor , topColor) );
 	var textureBottom = new THREE.Texture( generateTexture(bottomColor , bottomColor) );
 	var textureSide = new THREE.Texture( generateTexture( topColor , bottomColor) );
