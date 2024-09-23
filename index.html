@@ -153,12 +153,18 @@
 
 	
 		
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js"></script>
-		<!-- <script src="line3d/js/three.min.js"></script> -->
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.167.0/three.module.js",
+					"three/addons/": "./line3d/js/three/jsm/"
+				}
+			}
+		</script>
 
 		<script src="line3d/js/Detector.js"></script>
 		<!--<script src="js/stats.min.js"></script>-->
 
-		<script src="line3d/js/main.js"></script>
+		<script src="line3d/js/main.js" type="module"></script>
 	</body>
 </html>
