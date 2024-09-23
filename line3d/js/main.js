@@ -67,6 +67,7 @@ function init() {
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, myContent.scrollHeight );
 	container.appendChild( renderer.domElement );
+	renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 
 	
 
