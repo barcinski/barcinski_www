@@ -47,6 +47,7 @@ function init() {
 	//document.body.appendChild( container );
 
 	//alert(myContent.offsetHeight + " " + window.innerHeight);
+	
 	camera = new THREE.PerspectiveCamera( 60, window.innerWidth / myContent.scrollHeight, 1, 100000 );
 
 	scene = new THREE.Scene();
@@ -108,8 +109,8 @@ function addLines() {
 
 function addSkybox(){
 	// image
-	var topColor = "#968b30";
-	var bottomColor = "#b5a94e";
+	var topColor = "#fcba03";
+	var bottomColor = "#ff0851";
 	var textureTop = new THREE.Texture( generateTexture(topColor , topColor) );
 	var textureBottom = new THREE.Texture( generateTexture(bottomColor , bottomColor) );
 	var textureSide = new THREE.Texture( generateTexture( topColor , bottomColor) );
