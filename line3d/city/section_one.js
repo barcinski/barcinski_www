@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 import * as TILES from './tiles.js';
 import * as TILES_DOUBLE from './tiles_double.js';
-import { InstaMesh  } from './scrap.js';
+import { InstaMesh  } from './grid.js';
 //import { RoundedBoxGeometry } from './lib/RoundedBoxGeometry.js';
 
 import { getRandomColor} from "./index.js";

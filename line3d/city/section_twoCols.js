@@ -3,7 +3,7 @@ import * as THREE from 'three';
 
 import * as TILES from './tiles.js';
 import * as TILES_DOUBLE from './tiles_double.js';
-import { InstaMesh  } from './scrap.js';
+import { InstaMesh  } from './grid.js';
 
 import * as ONE from './section_one.js';
 import { getRandomColor} from "./index.js";

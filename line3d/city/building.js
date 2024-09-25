@@ -4,7 +4,7 @@ import * as ONE from './section_one.js';
 import * as TWO_ROWS from './section_twoRows.js';
 import * as TWO_COLS from './section_twoCols.js';
 import { RoundedBoxGeometry } from './lib/RoundedBoxGeometry.js';
-import { InstaMesh  } from './scrap.js';
+import { InstaMesh  } from './grid.js';
 
 import { getRandomColor} from "./index.js";
 

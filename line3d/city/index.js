@@ -3,7 +3,7 @@ import * as THREE from 'three';
 
 
 import * as Building from './building.js';
-import { Grid  } from './scrap.js';
+import { Grid  } from './grid.js';
 
 let container
 let citySize , city
@@ -73,58 +73,9 @@ function getRandomColor(){
 
 init();
 render();
-fxpreview();
-
-
-window.$fxhashFeatures = {
-	"Pallete index" : getPalleteIndex(generatedPallete),
-  "Number of colors": generatedPallete.length,
-  "City size": citySizeToString(citySize),
-  "Camera position" : sCameraPosition,
-  "Camera projection" : cameraTypeStr(),
-  "Buildings flow" : cityFlowStr()
-}
-//console.log($fxhashFeatures)
-
-function getPalleteIndex(p){
-	let indeces = ""
-	for(let i = 0 ; i < p.length ; i++){
-		indeces += "" + p[i][2];
-	}
-
-	
-	return indeces.toString();
-}
-
-function cameraTypeStr(){
-		return (camera == perspectiveCamera) ? "perspective" : "orthographic"
-}
-
-function cityFlowStr(){
-	let s
-
-	if(sCameraPosition == POS_CORNER)
-		s = (city.rotation.y == 0) ? "diagonal sinister" : "diagonal dexter"
-	else
-		s = (city.rotation.y == 0) ? "vertical" : "horizontal"
-
-	return s
-}
 
 
 
-function citySizeToString(intSize){
-	let s;
-	switch (intSize){
-		case 1 : s = "small"
-		break;
-		case 2 : s = "medium"
-		break;
-		case 3 : s = "large"
-		break;
-	}
-	return s;
-}
 
 function rnd(min , max){
 	return Math.floor(fxrand()*(max-min+1)) + min;
@@ -255,6 +206,7 @@ function init() {
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	container.appendChild( renderer.domElement );
+	
 
 
 
