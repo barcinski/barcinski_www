@@ -1,10 +1,37 @@
+
+if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+  //---- do not edit the following code (you can indent as you wish)
+  let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+  var fxhash = "oo" + Array(49).fill(0).map(_=>alphabet[(Math.random()*alphabet.length)|0]).join('')
+  let b58dec = str=>[...str].reduce((p,c)=>p*alphabet.length+alphabet.indexOf(c)|0, 0)
+  let fxhashTrunc = fxhash.slice(2)
+  let regex = new RegExp(".{" + ((fxhashTrunc.length/4)|0) + "}", 'g')
+  let hashes = fxhashTrunc.match(regex).map(h => b58dec(h))
+  let sfc32 = (a, b, c, d) => {
+    return () => {
+      a |= 0; b |= 0; c |= 0; d |= 0
+      var t = (a + b | 0) + d | 0
+      d = d + 1 | 0
+      a = b ^ b >>> 9
+      b = c + (c << 3) | 0
+      c = c << 21 | c >>> 11
+      c = c + t | 0
+      return (t >>> 0) / 4294967296
+    }
+  }
+  var fxrand = sfc32(...hashes)
+  // true if preview mode active, false otherwise
+
+
+
 import * as THREE from 'three';
 import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
 import { Line2 } from 'three/addons/lines/Line2.js';
 import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
+import { getRandomColor  } from '../city/color.js';
 //import Stats from 'three/addons/libs/stats.module.js';
 
-if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
 var container;
 
@@ -61,6 +88,8 @@ function init() {
 	addDummy();
 
 	addLines();
+
+	addInstancedBoxes();
 	
 
 	renderer = new THREE.WebGLRenderer();
@@ -106,6 +135,51 @@ function addLines() {
 	scene.add(lines);
 
 	
+}
+
+
+
+function addInstancedBoxes(){
+	
+	const amount = 7;
+	const count = Math.pow( amount, 3 );
+
+	const geometry = new THREE.BoxGeometry(200, 200, 200);
+	const material = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+
+	const mesh = new THREE.InstancedMesh( geometry, material, count );
+	let i = 0;
+	const offset = ( amount - 1 ) / 2;
+
+	const matrix = new THREE.Matrix4();
+	const color = new THREE.Color();
+	
+
+	for ( let x = 0; x < amount; x ++ ) {
+
+		for ( let y = 0; y < amount; y ++ ) {
+
+			for ( let z = 0; z < amount; z ++ ) {
+
+				
+				matrix.makeScale (1,Math.random()*4+1,1)
+				matrix.setPosition( (Math.random()-.5)*20000, (Math.random()-.5)*20000 , (Math.random()-.5)*20000 );
+								
+
+				mesh.setMatrixAt( i, matrix );
+				color.setHex(getRandomColor())
+				mesh.setColorAt( i, color );
+
+				i ++;
+
+			}
+
+		}
+
+	}
+
+	skybox.add( mesh );
+
 }
 
 function addSkybox(){
