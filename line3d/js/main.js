@@ -48,7 +48,7 @@ function init() {
 
 	//alert(myContent.offsetHeight + " " + window.innerHeight);
 	
-	camera = new THREE.PerspectiveCamera( 60, window.innerWidth / myContent.scrollHeight, 1, 100000 );
+	camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 100000 );
 
 	scene = new THREE.Scene();
 
@@ -67,7 +67,7 @@ function init() {
 
 	renderer = new THREE.WebGLRenderer();
 	renderer.setPixelRatio( window.devicePixelRatio );
-	renderer.setSize( window.innerWidth, myContent.scrollHeight );
+	renderer.setSize( window.innerWidth, window.innerHeight );
 	container.appendChild( renderer.domElement );
 	renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 
@@ -214,12 +214,12 @@ function generateTexture(color1 , color2) {
 function onWindowResize() {
 
 	windowHalfX = window.innerWidth / 2,
-	windowHalfY = myContent.scrollHeight / 2,
+	windowHalfY = window.innerHeight / 2,
 
-	camera.aspect = window.innerWidth / myContent.scrollHeight;
+	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
 
-	renderer.setSize( window.innerWidth, myContent.scrollHeight );
+	renderer.setSize( window.innerWidth, window.innerHeight );
 
 }
 
