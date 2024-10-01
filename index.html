@@ -13,83 +13,109 @@
 	    <meta property="og:image" content="http://www.barcinski.nl/pics/barcinski_fb_thumb.png" />
 	    
 		<style type="text/css"> 
-	
+			
+			html {
+				height: 100%;
+				overscroll-behavior-y: none;
+			}
+			
+			#myContent {
+				position: absolute;
+				padding: 0px;
+				margin: 0px;
+				
+				width: 100%;
+				height: 100%;
+				font-size : 18px;
 
+			}
+
+			h4 {	
+				margin-bottom: 0px;display: block;
+			}
+
+			a {
+				color : rgb(40, 174, 120);
+				font-weight: bold;
+				font-family: Helvetica, Arial;
+			}
+
+			a.ico {text-decoration:none;}
+			a.txt {display: inline-block;padding-top: 0px;}
+			a.txt:hover {color: #000;} 
+
+				
+			
 		
+			body {
+				height: 100%;
+				margin: 0;
+				padding: 0;
+				background-color: #DACE90;
+				
+			}
 
-	
-	html {
-		height: 100%;
-		overscroll-behavior-y: none;
-	}
-	
-	#myContent {
-		position: absolute;
-		padding: 0px;
-		margin: 0px;
-		
-		width: 100%;
-		height: 100%;
-		font-size : 18px;
+			
 
-	}
+			#glContent {
+				position: fixed;
+				top: 0px;
+				left: 0px;
+				width:100%;
+				height: 100%;
+				overflow: hidden;
 
-	h4 {	
-		margin-bottom: 0px;display: block;
-	}
+			} 
 
-	a {
-		color : rgb(40, 174, 120);
-		font-weight: bold;
-		font-family: Helvetica, Arial;
-	}
+			#logoDummy {
+				visibility: hidden;
+			}
 
-	a.ico {text-decoration:none;}
-	a.txt {display: inline-block;padding-top: 0px;}
-	a.txt:hover {color: #000;} 
+			#logoLink {
+				position: absolute;
+				z-index: 10;
+				border: 1px solid transparent;
+			}
 
-		
-	
- 
-	body {
-		height: 100%;
-		margin: 0;
-		padding: 0;
-		background-color: #DACE90;
-		
-	}
+			#logoLink:hover {
+				border: 1px solid black;
+			}
 
-	
-
-	#glContent {
-		position: fixed;
-		top: 0px;
-		left: 0px;
-		width:100%;
-		height: 100%;
-		overflow: hidden;
-
-	} 
-
-
- 	/*@media (max-width: 640px) {
- 		#myContent {
- 			position:absolute;
- 		} 
-
- 		#glContent {
- 			position: fixed;
- 		}
- 	}*/
-
+			#moreContent {
+  				clip-path: circle(0%);
+			}
 
 
 </style> 
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script lang="javascript">
+
 	function toggleContent(){
-		if(moreContent.style.display == 'none')moreContent.style.display = 'block';
-		else moreContent.style.display = 'none';
+		
+		if(moreContent.style.display == 'none'){
+			var rect = logoDummy.getBoundingClientRect();
+			logoLink.style.top = rect.top + "px";
+
+			moreContent.style.display = 'block';
+			
+
+			var rect2 = logoDummy.getBoundingClientRect();
+			gsap.to("#logoLink" , {y : rect2.top - rect.top, duration : 0.5 , overwrite: true})
+			gsap.to("#moreContent" , {clipPath: 'circle(100%)', duration : 3 , overwrite: true})
+		}
+		else {
+			var rect = logoLink.getBoundingClientRect();
+			
+			gsap.to("#logoLink" , {y : 0, duration : 0.5 , overwrite: true})
+			gsap.to("#moreContent" , {clipPath: 'circle(0%)' , onComplete: hideMoreContent, duration : 1 , delay: -0.5 , overwrite: true})
+		}
 	}
+	function hideMoreContent(){
+		moreContent.style.clipPath = 'circle(0%)';
+		moreContent.style.display = 'none';
+	}
+	
 </script>
 
 	</head>
@@ -100,8 +126,9 @@
 				<tr>
 					<td valign="middle" align="center">
 						<br>
+						<a id="logoLink" href="javascript:toggleContent();"><img id="logoFree" src="pics/logo_big_trans.png" width="171" height="63" alt="barcinski" /></a>
 						<span >
-							<a href="javascript:toggleContent();"><img id="logo" src="pics/logo_big_trans.png" width="171" height="63" alt="barcinski" /></a>
+							<img id="logoDummy" src="pics/logo_big_trans.png" width="171" height="63" alt="barcinski"/>
 						</span>
 					
 				
