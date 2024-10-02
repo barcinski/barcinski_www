@@ -270,8 +270,8 @@ function render() {
 	var timer = 0.0001 * Date.now();
 
 	
-	sideSpeed = mouseX * 0.00002;
-	upRotationSpeed = mouseY * 0.00001;
+	sideSpeed = mouseX * 0.000004;
+	upRotationSpeed = mouseY * 0.000002;
 
 
 	dummy.translateZ(-10);
