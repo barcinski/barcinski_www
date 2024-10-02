@@ -77,9 +77,13 @@
 				border: 1px solid transparent;
 			}
 
-			#logoLink:hover {
-				border: 1px solid black;
+			@media not all and (pointer: coarse) {
+				#logoLink:hover {
+					border: 1px solid black;
+				}
 			}
+
+			
 
 			#moreContent {
   				clip-path: circle(0%);
