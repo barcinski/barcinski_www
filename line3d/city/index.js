@@ -31,9 +31,9 @@ let dirLight , light;
 
 
 init();
-render();
-
-
+//render();
+animate();
+renderer.shadowMap.autoUpdate = false;
 
 
 function rnd(min , max){
@@ -86,9 +86,10 @@ function init() {
 	ortoCamera.updateProjectionMatrix();
 
 
-	if(fxrand()>.5){
+	//if(fxrand()>.5){
+	if(0){
 		camera = perspectiveCamera;
-		if(fxrand()>.5){
+		if(1){
 			camera.position.set( 0, 1100, 6000 ) //front view
 			sCameraPosition = POS_FRONT
 		}
@@ -99,7 +100,8 @@ function init() {
 
 	}else{
 		camera = ortoCamera;
-		if(fxrand()>.5){
+		//if(fxrand()>.5){
+		if(1){
 			camera.position.set( 5000, 7000, 5000 )//corner view
 			sCameraPosition = POS_CORNER
 		}
@@ -129,7 +131,8 @@ function init() {
 
     
 
-  citySize = rnd(1,3);
+  //citySize = rnd(1,3);
+  citySize = 0.5;
   city = generateACity(citySize);
 	scene.add(city);
 
@@ -141,8 +144,8 @@ function init() {
 	dirLight = new THREE.DirectionalLight( 0xffffff );
 	dirLight.position.set( - 2000, 6000, 2000 );
 	dirLight.castShadow = true;
-	dirLight.shadow.mapSize.width = 8128;
-	dirLight.shadow.mapSize.height = 8128;
+	dirLight.shadow.mapSize.width = 4096;
+	dirLight.shadow.mapSize.height = 4096;
 
 	dirLight.shadow.camera.top = 8000;
 	dirLight.shadow.camera.bottom = - 8000;
@@ -164,6 +167,7 @@ function init() {
 	renderer.shadowMap.enabled = true;
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
+	//renderer.shadowMap.autoUpdate = true;
 	container.appendChild( renderer.domElement );
 	
 
@@ -208,6 +212,21 @@ function onWindowResize() {
 
 function render() {
 	renderer.render( scene, camera );
+
+	
+}
+
+var currentFrame = 0
+function animate(){
+	requestAnimationFrame(animate);
+
+	var halfPI = Math.PI/4;
+	var t = performance.now() * 0.00004 + halfPI;
+	camera.position.set( Math.sin(t)*6000, 6000, Math.cos(t)*6000 )
+	camera.lookAt(0,0,0);
+
+	render();
+	currentFrame++;
 }
 
 function makeDigits(int){
