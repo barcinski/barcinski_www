@@ -10,12 +10,12 @@ import { getRandomColor} from "./index.js";
 
 
 function random(min = -1,max = 1){
-	return fxrand()*(max - min)+min;
+	return Math.random()*(max - min)+min;
 }
 
 
 function rnd(max = 1){
-	return fxrand() * max;
+	return Math.random() * max;
 }
 
 function max(a,b){

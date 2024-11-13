@@ -55,7 +55,7 @@ class Section extends ONE.Section{
 
 
 		let tileGeometry_00 	= new THREE.ExtrudeGeometry( this.getShape(rectWidth,rectHeight), extrudeSettings );
-		extrudeSettings.depth *= fxrand() * 1.5 + 0.5;		
+		extrudeSettings.depth *= Math.random() * 1.5 + 0.5;		
 		const tileGeometry_01 = new THREE.ExtrudeGeometry( this.getShape_01(rectWidth_01,rectHeight), extrudeSettings );
 		
 		rectWidth+=(this.bevelSize*2);
@@ -168,7 +168,7 @@ export class MidSection_DoubleTile extends Section{
 		let rectWidth   = 165;
 		let rectHeight  = 100;
 
-		let rnd = fxrand()*20 + 10;
+		let rnd = Math.random()*20 + 10;
 
 		super.createGeoms(rectWidth-rnd,rectHeight, rnd);
 	}

@@ -45,7 +45,7 @@ class Wall{
 
 export class Section{
 	constructor( tilesX , tilesY , tilesZ ){
-		this.extrudeDepth = fxrand()* 20 + 10;
+		this.extrudeDepth = Math.random()* 20 + 10;
 		this.bevelSize = 2.5;
 		
 		//////////////

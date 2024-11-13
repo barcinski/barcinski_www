@@ -35,7 +35,7 @@ function int(f){
 }
 
 function random(min,max){
-	return fxrand()*(max - min)+min;
+	return Math.random()*(max - min)+min;
 }
 
 function min(a,b){

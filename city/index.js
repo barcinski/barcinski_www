@@ -37,7 +37,7 @@ renderer.shadowMap.autoUpdate = false;
 
 
 function rnd(min , max){
-	return Math.floor(fxrand()*(max-min+1)) + min;
+	return Math.floor(Math.random()*(max-min+1)) + min;
 }
 
 
@@ -48,7 +48,7 @@ function generateACity(size){
 	let g = new Grid(gsize,gsize)
     let bs = 125 //blockSize
     let city = new THREE.Group();
-    if(fxrand()>.5)city.rotation.y = Math.PI/2;
+    if(Math.random()>.5)city.rotation.y = Math.PI/2;
     let scale = 0.8 / size ;
     city.scale.set(scale,scale,scale)
     for(let i = 0 ; i < g.blocks.length ; i++){
