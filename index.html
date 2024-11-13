@@ -96,6 +96,16 @@
 
 			#moreContent {
   				clip-path: circle(0%);
+				background-color: rgb(255, 255, 255, 0.7);
+				
+				padding-top: 75px;
+				margin-top: -75px;
+
+				padding-left: 50px ;
+				padding-right: 50px ;
+
+				width: min-content;
+				border: 2px solid black;
 			}
 
 
@@ -115,13 +125,13 @@
 
 			var rect2 = logoDummy.getBoundingClientRect();
 			gsap.to("#logoLink" , {y : rect2.top - rect.top, duration : 0.5 , overwrite: true})
-			gsap.to("#moreContent" , {clipPath: 'circle(100%)', duration : 2 , overwrite: true})
+			gsap.to("#moreContent" , {clipPath: 'circle(100%)', duration : 1 , overwrite: true})
 		}
 		else {
 			var rect = logoLink.getBoundingClientRect();
 			
 			gsap.to("#logoLink" , {y : 0, duration : 0.5 , overwrite: true})
-			gsap.to("#moreContent" , {clipPath: 'circle(0%)' , onComplete: hideMoreContent, duration : 1 , delay: -0.5 , overwrite: true})
+			gsap.to("#moreContent" , {clipPath: 'circle(0%)' , onComplete: hideMoreContent, duration : 1.0 , delay: -0.5 , overwrite: true})
 		}
 	}
 	function hideMoreContent(){
