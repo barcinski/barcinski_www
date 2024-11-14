@@ -108,6 +108,26 @@
 				border-radius: 50px;
 			}
 
+			#mainCell {
+				padding-top: 20px;
+				padding-bottom: 20px;
+			}
+
+			@media only screen and (max-width: 600px) {
+				#moreContent {
+					width: auto;
+					border-radius: 0px;
+					padding-left: 0px ;
+					padding-right: 0px ;
+					
+				}
+
+				#mainCell {
+					padding-top: 0px;
+					padding-bottom: 0px;
+				}
+			}
+
 
 </style> 
 
@@ -147,15 +167,15 @@
 		<div id="myContent">
 			<table width="100%" height="100%" celpadding="0" celspacing="0">
 				<tr>
-					<td valign="middle" align="center">
-						<br>
+					<td id="mainCell" valign="middle" align="center">
+					
 						<a id="logoLink" href="javascript:toggleContent();"><img id="logoFree" src="pics/logo_big_trans.png" width="171" height="63" alt="barcinski" /></a>
 						<span >
 							<img id="logoDummy" src="pics/logo_big_trans.png" width="171" height="63" alt="barcinski"/>
 						</span>
 					
 				
-						<br />
+				
 						<div id="moreContent" style="display: none;">
 							<h4>Websites:</h4>
 			
@@ -209,7 +229,6 @@
 							<br>
 						
 						</div>
-						<br>
 					</td>
 				</tr>
 			</table>	
