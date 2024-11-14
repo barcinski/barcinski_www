@@ -6,7 +6,7 @@ import * as TWO_COLS from './section_twoCols.js';
 import { RoundedBoxGeometry } from './lib/RoundedBoxGeometry.js';
 import { InstaMesh  } from './grid.js';
 
-import { getRandomColor} from "./index.js";
+import { getRandomColor  } from './color.js';
 
 
 function random(min = -1,max = 1){

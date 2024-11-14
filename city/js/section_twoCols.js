@@ -6,7 +6,7 @@ import * as TILES_DOUBLE from './tiles_double.js';
 import { InstaMesh  } from './grid.js';
 
 import * as ONE from './section_one.js';
-import { getRandomColor} from "./index.js";
+import { getRandomColor  } from './color.js';
 
 class WallWithTwoCols{
 	constructor(tilesX,tilesY , tileGeometry_00 , tileGeometry_01 , offset ){
