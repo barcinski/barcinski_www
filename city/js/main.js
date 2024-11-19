@@ -69,8 +69,9 @@ function generateACity(size){
 
 
 function init() {
-	container = document.createElement( 'div' );
-	document.body.appendChild( container );
+	container = document.getElementById("glContent");
+	// container = document.createElement( 'div' );
+	// document.body.appendChild( container );
 
 	scene = new THREE.Scene();
 	scene.background = new THREE.Color( getRandomColor() );
@@ -284,4 +285,4 @@ function switchCamera(newCamera){
 }
 
 
-export { getRandomColor }
+//export { getRandomColor }

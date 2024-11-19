@@ -19,7 +19,7 @@
     	<meta property="fb:app_id" content="773089266151120" /> 
 	    <meta property="og:url" content="https://www.barcinski.nl/" />
 	    <meta property="og:description" content="Portfolio, selected works, projects and collaborations by Mark Barcinski."> 
-	    <meta property="og:image" content="https://www.barcinski.nl/pics/barcinski_fb_thumb.png" />
+	    <meta property="og:image" content="http://www.barcinski.nl/pics/barcinski_fb_thumb.png" />
 	    
 		<style type="text/css"> 
 			
@@ -44,7 +44,7 @@
 			}
 
 			a {
-				color : rgb(40, 174, 120);
+				color : #028e96;
 				font-weight: bold;
 				font-family: Helvetica, Arial;
 			}
@@ -73,23 +73,27 @@
 				width:100%;
 				height: 100%;
 				overflow: hidden;
+
 			} 
 
 			#logoDummy {
 				visibility: hidden;
-				border: 3px solid transparent;
+				border: 4px solid transparent;
 			}
 
 			#logoLink {
 				position: absolute;
 				z-index: 10;
-				border: 3px solid transparent;
+				border: 4px solid transparent;
+				background-color: rgb(255, 255, 255, 0.8);
+				border-radius: 15px;
 			}
 
 			@media not all and (pointer: coarse) {
 				#logoLink:hover {
-					border: 3px solid black;
-					border-radius: 15px;
+					border: 4px solid black;
+					
+					
 				}
 			}
 
@@ -134,7 +138,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script lang="javascript">
-
+	logoBorder = 4;
 	function toggleContent(){
 		
 		if(moreContent.style.display == 'none'){
@@ -145,17 +149,16 @@
 			
 
 			var rect2 = logoDummy.getBoundingClientRect();
-			gsap.to("#logoLink" , {y : rect2.top - rect.top, duration : 0.5 , overwrite: true})
+			gsap.to("#logoLink" , {y : rect2.top - rect.top + logoBorder, backgroundColor : "rgb(255, 255, 255, 0.0)", duration : 0.5 , overwrite: true})
 			gsap.to("#moreContent" , {clipPath: 'circle(100%)', duration : 1 , overwrite: true})
 		}
 		else {
-			var rect = logoLink.getBoundingClientRect();
 			
-			gsap.to("#logoLink" , {y : 0, duration : 0.5 , overwrite: true})
+			gsap.to("#logoLink" , {y : 0, duration : 0.5 , backgroundColor : "rgb(255, 255, 255, 0.8)" , overwrite: true})
 			gsap.to("#moreContent" , {clipPath: 'circle(0%)' , onComplete: hideMoreContent, duration : 1.0 , delay: -0.5 , overwrite: true})
 		}
 	}
-	
+
 	function hideMoreContent(){
 		moreContent.style.clipPath = 'circle(0%)';
 		moreContent.style.display = 'none';
@@ -168,7 +171,7 @@
 	window.onresize = function() {
 		var rect = logoDummy.getBoundingClientRect();
 		gsap.to("#logoLink" , {y : 0, duration : 0.0 , overwrite: true})
-		logoLink.style.top = rect.top + "px";
+		logoLink.style.top = rect.top + logoBorder + "px";
 		logoLink.style.transformY = 0;
 	}
 	
@@ -249,13 +252,11 @@
 		<script type="importmap">
 			{
 				"imports": {
-					"three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.167.0/three.module.min.js",
-					"three/addons/": "./line3d/js/three/jsm/"
+					"three": "https://cdn.skypack.dev/three@0.138.0/build/three.module"
 				}
 			}
 		</script>
-		<script src="line3d/js/Detector.js"></script>
-		<!--<script src="js/stats.min.js"></script>-->
-		<script src="line3d/js/main.js" type="module"></script>
+		<script type="module" src="./city/js/main.js">
+		</script>
 	</body>
 </html>
