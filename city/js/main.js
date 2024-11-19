@@ -181,8 +181,18 @@ function init() {
 }
 
 function onWindowResize() {
-	let aspect = window.innerWidth / window.innerHeight;
-	
+	var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream; 
+	var iw = (iOS) ? screen.width : window.innerWidth, ih = (iOS) ? screen.height : window.innerHeight;
+
+	const portrait = window.matchMedia("(orientation: portrait)").matches;
+	if(iOS && !portrait){
+		const temp = iw;
+		iw = ih;
+		ih = temp;
+	}
+	let aspect = iw / ih;
+
+		
 
 	ortoCamera.left = - frustumSize * aspect / 2;
 	ortoCamera.right = frustumSize * aspect / 2;
@@ -198,12 +208,12 @@ function onWindowResize() {
 	
 
 
-	perspectiveCamera.aspect = window.innerWidth / window.innerHeight;
+	perspectiveCamera.aspect = iw / ih;
 	perspectiveCamera.updateProjectionMatrix();
 
 	
 
-	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.setSize( iw, ih );
 	render();
 	
 
@@ -221,9 +231,23 @@ var currentFrame = 0
 function animate(){
 	requestAnimationFrame(animate);
 
+
+
+	var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream; 
+	var iw = (iOS) ? screen.width : window.innerWidth, ih = (iOS) ? screen.height : window.innerHeight;
+
+	const portrait = window.matchMedia("(orientation: portrait)").matches;
+	if(iOS && !portrait){
+		const temp = iw;
+		iw = ih;
+		ih = temp;
+	}
+	let aspect = iw / ih;
+
 	var halfPI = Math.PI/4;
 	var t = performance.now() * 0.00004 + halfPI;
-	camera.position.set( Math.sin(t)*6000, 6000, Math.cos(t)*6000 )
+	var camVpos = 6000 - (window.pageYOffset/ih) * 1000;
+	camera.position.set( Math.sin(t)*6000, camVpos, Math.cos(t)*6000 )
 	camera.lookAt(0,0,0);
 
 	render();
