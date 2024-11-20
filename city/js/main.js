@@ -120,11 +120,11 @@ function init() {
 	//light = new THREE.AmbientLight( 0xffffff, 0.2 ); // soft white light
 
 	light.position.set(  2000, 2000, - 2000 );
-  scene.add(light);
+  	scene.add(light);
 
   let light0 = new THREE.DirectionalLight( 0xffffff, 0.4 );
 	light0.position.set(  2000, 2000, 2000 );
-  scene.add(light0);
+ 	 scene.add(light0);
 
   
   //camera.add(light.target);
@@ -137,7 +137,8 @@ function init() {
   city = generateACity(citySize);
 	scene.add(city);
 
-	const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 10000, 10000 ), new THREE.MeshStandardMaterial( { color: getRandomColor(), depthWrite: false } ) );
+	var planeColor = (window.groundColor) ? groundColor : getRandomColor();
+	const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 10000, 10000 ), new THREE.MeshStandardMaterial( { color: planeColor, depthWrite: false } ) );
 	mesh.rotation.x = - Math.PI / 2;
 	mesh.receiveShadow = true;
 	scene.add( mesh );

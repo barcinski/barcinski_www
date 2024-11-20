@@ -15,12 +15,18 @@
 	</head>
 	<body>
 		<div id="glContent"></div>
+		
 		<script type="importmap">
 			{
 				"imports": {
 					"three": "https://cdn.skypack.dev/three@0.138.0/build/three.module"
 				}
 			}
+		</script>
+		<script type="module">
+			import { getRandomColor  } from './js/color.js';
+			window.groundColor = getRandomColor();
+			document.body.style.backgroundColor = "#" + window.groundColor.toString(16).padStart(6, '0')
 		</script>
 		<script type="module" src="./js/main.js">
 		</script>

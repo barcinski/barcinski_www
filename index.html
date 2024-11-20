@@ -255,6 +255,11 @@
 				}
 			}
 		</script>
+		<script type="module">
+			import { getRandomColor  } from './city/js/color.js';
+			window.groundColor = getRandomColor();
+			document.body.style.backgroundColor = "#" + window.groundColor.toString(16).padStart(6, '0')
+		</script>
 		<script type="module" src="./city/js/main.js">
 		</script>
 	</body>
