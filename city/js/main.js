@@ -167,16 +167,18 @@ function init() {
 	renderer = new THREE.WebGLRenderer( { antialias: true } );
 	renderer.shadowMap.enabled = true;
 	renderer.setPixelRatio( window.devicePixelRatio );
-	renderer.setSize( window.innerWidth, window.innerHeight );
+	//renderer.setSize( window.innerWidth, window.innerHeight );
 	//renderer.shadowMap.autoUpdate = true;
 	container.appendChild( renderer.domElement );
 	
+	onWindowResize();
 
 
 
 
 
 	window.addEventListener( 'resize', onWindowResize );
+	
 
 }
 
@@ -227,7 +229,9 @@ function render() {
 	
 }
 
-var currentFrame = 0
+var currentFrame = 0;
+
+
 function animate(){
 	requestAnimationFrame(animate);
 
