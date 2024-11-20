@@ -252,6 +252,10 @@ function animate(){
 	var halfPI = Math.PI/4;
 	var t = performance.now() * 0.00004 + halfPI;
 	var camVpos = 6000 - (window.pageYOffset/ih) * 1000;
+	
+	if(camVpos < 4500)switchCamera(perspectiveCamera)
+	else switchCamera(ortoCamera)
+	
 	camera.position.set( Math.sin(t)*6000, camVpos, Math.cos(t)*6000 )
 	camera.lookAt(0,0,0);
 
