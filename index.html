@@ -13,7 +13,8 @@
 <!-- end of Google tag (gtag.js) -->
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
 		<title>Barcinski.nl</title>
-        <meta name="description" content="Portfolio, selected works, projects and collaborations by Mark Barcinski."> 
+        <meta name="description" content="Portfolio, selected works, projects and collaborations by Mark Barcinski. 
+		Code generated random 3d city. Hit refresh to generate a new one"> 
          
 
         <meta property="og:title" content="Barcinski.nl" />
@@ -62,7 +63,7 @@
 				height: 100%;
 				margin: 0;
 				padding: 0;
-				background-color: #DACE90;
+				background-color: #e14d45;
 				
 			}
 
@@ -150,7 +151,11 @@
 			logoLink.style.display = 'none';
 			
 			gsap.to("#moreContent" , {clipPath: 'circle(100%)', duration : 1 , overwrite: true})
-
+			scrollTo({
+				top: 0,
+				left: 0,
+				behavior: "smooth",
+			});
 		}
 		else {
 			
@@ -165,6 +170,8 @@
 		moreContent.style.display = 'none';
 
 		logoLink.style.display = 'block';
+
+		
 	}
 
 	
