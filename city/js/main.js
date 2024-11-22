@@ -240,9 +240,9 @@ function animate(){
 
 	var halfPI = Math.PI/4;
 	var t = performance.now() * 0.00004 + halfPI;
-	var camVpos = 6000 - (window.scrollY/document.documentElement.scrollHeight) * 6500;
+	var camVpos = 6000 - (window.scrollY/document.documentElement.scrollHeight) * 5000;
 	
-	if(camVpos < 3500)switchCamera(perspectiveCamera)
+	if(camVpos < 4000)switchCamera(perspectiveCamera)
 	else switchCamera(ortoCamera)
 	
 	camera.position.set( Math.sin(t)*6000, camVpos, Math.cos(t)*6000 )
