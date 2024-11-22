@@ -233,27 +233,16 @@ function render() {
 var currentFrame = 0;
 
 
+
+
 function animate(){
 	requestAnimationFrame(animate);
 
-
-
-	var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream; 
-	var iw = (iOS) ? screen.width : window.innerWidth, ih = (iOS) ? screen.height : window.innerHeight;
-
-	const portrait = window.matchMedia("(orientation: portrait)").matches;
-	if(iOS && !portrait){
-		const temp = iw;
-		iw = ih;
-		ih = temp;
-	}
-	let aspect = iw / ih;
-
 	var halfPI = Math.PI/4;
 	var t = performance.now() * 0.00004 + halfPI;
-	var camVpos = 6000 - (window.pageYOffset/ih) * 1000;
+	var camVpos = 6000 - (window.scrollY/document.documentElement.scrollHeight) * 6500;
 	
-	if(camVpos < 4500)switchCamera(perspectiveCamera)
+	if(camVpos < 3500)switchCamera(perspectiveCamera)
 	else switchCamera(ortoCamera)
 	
 	camera.position.set( Math.sin(t)*6000, camVpos, Math.cos(t)*6000 )
