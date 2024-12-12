@@ -1,176 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8GL800S4TH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-8GL800S4TH"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
 
-  gtag('config', 'G-8GL800S4TH');
-</script>
-<!-- end of Google tag (gtag.js) -->
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+		gtag('config', 'G-8GL800S4TH');
+		</script>
+		<!-- end of Google tag (gtag.js) -->
+
+		<meta name="viewport" content="width=device-width">
 		<title>Barcinski.nl</title>
         <meta name="description" content="Portfolio, selected works, projects and collaborations by Mark Barcinski. 
 		Code generated random 3d city. Hit refresh to generate a new one"> 
          
 
         <meta property="og:title" content="Barcinski.nl" />
-    	<meta property="fb:app_id" content="773089266151120" /> 
 	    <meta property="og:url" content="https://www.barcinski.nl/" />
 	    <meta property="og:description" content="Portfolio, selected works, projects and collaborations by Mark Barcinski."> 
 	    <meta property="og:image" content="http://www.barcinski.nl/pics/barcinski_fb_thumb.png" />
 	    
 		<link href="https://fonts.cdnfonts.com/css/cooper-black" rel="stylesheet">
-                
-		<style type="text/css"> 
-			
-			html {
-				height: 100%;
-				/* overscroll-behavior-y: none; */
-				/* font-family: Helvetica, Arial; */
-				font-family: 'Cooper Black';
-			}
-			
-			
-
-			h4 {	
-				margin-bottom: 10px;
-				display: block;
-			}
-
-			a {
-				color : #028e96;
-				font-weight: bold;
-				font-family: "Helvetica Neue";
-				font-size: 12pt;
-			}
-
-			a.ico {text-decoration:none;}
-			a.txt { margin: 10px;}
-			a.txt:hover {color: #000;} 
-
-				
-			
-		
-			body {
-				height: 100%;
-				margin: 0;
-				padding: 0;
-				background-color: #e14d45;
-				
-			}
-
-			
-
-			#glContent {
-				position: fixed;
-				top: 0px;
-				left: 0px;
-				width:100vw;
-				height: 100vh;
-				overflow: hidden;
-
-			} 
-
-
-
-			#logoLink {
-				position: absolute;
-				
-
-				border: 4px solid transparent;
-				background-color: rgb(255, 255, 255);
-				border-radius: 15px;
-
-				top : calc(50% - 35px);
-				
-				left : 50%;
-                transform: translateX(-50%);
-
-				padding: 0;
-			}
-
-			#logoLink img {
-				padding: 5px;
-				display: block;
-			}
-
-			
-
-			@media not all and (pointer: coarse) {
-				#logoLink:hover  {
-					border: 4px solid black;
-				}
-			}
-
-			
-			#contentWrapper {
-				position: relative;
-				margin: 0;
-                /* top : 100vh; */
-				/* transform: translateY(-50%); */
-				left : 50%;
-                transform: translateX(-50%);
-				width: 100vw;
-				width: min-content;
-				text-align: center;
-			}
-			
-			.content {
-  				
-				background-color: rgb(255, 255, 255);
-				
-				padding-left: 50px ;
-				padding-right: 50px ;
-				padding-top: 15px;
-				padding-bottom: 25px;
-				
-				border-radius: 50px;
-			
-
-				
-			}
-
-			@media only screen and (max-width: 600px) {
-				.content {
-					padding-left: 20px ;
-					padding-right: 20px ;
-				}
-
-				
-			}
-
+        <link type="text/css" rel="stylesheet" href="css/index.css">
 		
 
+		<script>
+			function scrollToElement(element){
+				console.log(element.getBoundingClientRect().top - 25 + window.scrollY)
+				scrollTo({
+					top: element.getBoundingClientRect().top - 25 + window.scrollY,
+					left: 0,
+					behavior: "smooth",
+				});	
+			}
 
-</style> 
-
-	<script>
-		function scrollToElement(element){
-			 console.log(element.getBoundingClientRect().top - 25 + window.scrollY)
-			scrollTo({
-				top: element.getBoundingClientRect().top - 25 + window.scrollY,
-				left: 0,
-				behavior: "smooth",
-			});	
-		}
-
-	</script>
-
-
+		</script>
 	</head>
+
 	<body>
 		<div id="glContent"></div>
-		<!-- <div id="myContent"> -->
-			
-					
-			<a id="logoLink" href="#" onclick="scrollToElement(projects);return false;"><img src="pics/logo_big.png" width="171" height="63" alt="barcinski" /></a>
+		
+		<a id="logoLink" href="#" onclick="scrollToElement(projects);return false;"><img src="pics/logo_big.png" width="171" height="63" alt="barcinski" /></a>
 
 			
-			<div style="height: 150vh;"></div>
+		<div style="height: 150vh;"></div>
 		<div id="contentWrapper">
 			<div id="projects" class="content">
 				<h1>Projects</h1>
@@ -199,7 +75,7 @@
 				<div><a href="https://www.youtube.com/watch?v=tuOv93MdelA" class="txt">Fine China Superbone</a></div>
 				<br/>
 			</div>
-			<div style="height: 100vh;"></div>
+			<div style="height: 101vh;"></div>
 
 
 			<div id="about" class="content">
@@ -211,7 +87,7 @@
 				
 				<p> Mark is a generative artist, creative developer and interactive experience designer.</p>
 			</div>
-			<div style="height: 100vh;"></div>
+			<div style="height: 101vh;"></div>
 
 			<div id="contact" class="content">
 				<h1>Contact</h1>
@@ -247,7 +123,7 @@
 			</div>
 			<div style="height: calc(50vh - 100px);"></div>
 		</div>			
-		<!-- </div> -->
+		
 		
 		<script type="importmap">
 			{

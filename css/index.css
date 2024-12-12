@@ -1,0 +1,115 @@
+html {
+    height: 100%;
+    /* overscroll-behavior-y: none; */
+    /* font-family: Helvetica, Arial; */
+    font-family: 'Cooper Black';
+}
+
+
+
+h4 {	
+    margin-bottom: 10px;
+    display: block;
+}
+
+a {
+    color : #028e96;
+    font-weight: bold;
+    font-family: "Helvetica Neue";
+    font-size: 12pt;
+}
+
+a.ico {text-decoration:none;}
+a.txt { margin: 10px;}
+a.txt:hover {color: #000;} 
+
+    
+
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #e14d45;
+    
+}
+
+
+
+#glContent {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width:100vw;
+    height: 100vh;
+    overflow: hidden;
+
+} 
+
+
+
+#logoLink {
+    position: absolute;
+    
+
+    border: 4px solid transparent;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+
+    top : calc(50% - 35px);
+    
+    left : 50%;
+    transform: translateX(-50%);
+
+    padding: 0;
+}
+
+#logoLink img {
+    padding: 5px;
+    display: block;
+}
+
+
+
+@media not all and (pointer: coarse) {
+    #logoLink:hover  {
+        border: 4px solid black;
+    }
+}
+
+
+#contentWrapper {
+    position: relative;
+    margin: 0;
+    /* top : 100vh; */
+    /* transform: translateY(-50%); */
+    left : 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    width: min-content;
+    text-align: center;
+}
+
+.content {
+      
+    background-color: rgb(255, 255, 255);
+    
+    padding-left: 50px ;
+    padding-right: 50px ;
+    padding-top: 15px;
+    padding-bottom: 25px;
+    
+    border-radius: 50px;
+
+
+    
+}
+
+@media only screen and (max-width: 600px) {
+    .content {
+        padding-left: 20px ;
+        padding-right: 20px ;
+    }
+
+    
+}
