@@ -1,104 +1,200 @@
-<!DOCTYPE html>
-<html>
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8GL800S4TH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<html lang="en"  translate="no">
+	<head>
+		<title>Destroy Everything</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="./files/main.css">
+		<link type="text/css" rel="stylesheet" href="./files/flicker.css">
+		<style>
+			iframe {
+				width: 100%;
+				height: 100%;
+				border: none;
+				position: absolute;
+				top: 0%;
+			}
 
-  gtag('config', 'G-8GL800S4TH');
-</script>
-	<meta name="viewport" content="width=device-width, initial-scale=0.55, maximum-scale=3.0, minimum-scale=0.55">
-	<title>Destroy Everything Game</title>
-	<meta property="og:image" content="http://barcinski.nl/destroy/pics/fb_thunmb.png"/> 
+			#soundImg {
+				position: absolute;
+				bottom: 1;
+				left: 2;
+				width: 30px;
+				cursor: pointer;
+				visibility: hidden;
+			}
 
+			#soundImgBlack {
+				position: absolute;
+				bottom: 0;
+				left: 3;
+				width: 30px;
+				visibility: hidden;
+			}
 
+			#tapHint {
+				position: absolute;
+				width: 10em;
+				margin: auto;
+				left: 0;
+				right: 0;
+				top :0;
+				bottom: 0;
+				display: none;
+			}
 
-	<style type="text/css">
-		body {
-			font-family:Impact;
-			background-color: black;
-			color: white;
+			#settingsImg {
+				position: absolute;
+				bottom: 2;
+				right: 1;
+				width: 30px;
+				cursor: pointer;
+				visibility: hidden;
+			}
+
+			#settingsImgBlack {
+				position: absolute;
+				bottom: 1;
+				right: 0;
+				width: 30px;
+				visibility: hidden;
+			}
+
+			#crosshair {
+				position: absolute;
+				width:64px;
+				margin: auto;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+			}
+
+			#countdown {
+				position: absolute;
+				font-family: 'Cooper Black', sans-serif;
+				font-size: 24em;
+				text-align: center;
+				margin: auto;
+				left: 0;
+				right: 0;
+				top :calc(50% - 0.2em);
+				bottom: 0;
+				color: white;
+				text-shadow: black 3px 3px;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+	<div id="info">Damage: 0.0%</div>
+	<div id="infoLeft"></div>
+	<div id="container"></div>
+
+	<script src="./build/ammo_regnaio/ammo.wasm.js"></script>
+
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "./build/three.module.min.js",
+				"three/addons/": "./build/jsm/"
+			}
 		}
+	</script>
+	<!-- 
+ __   __  _______  ___   __    _ 
+|  |_|  ||   _   ||   | |  |  | |
+|       ||  |_|  ||   | |   |_| |
+|       ||       ||   | |       |
+|       ||       ||   | |  _    |
+| ||_|| ||   _   ||   | | | |   |
+|_|   |_||__| |__||___| |_|  |__|
 
+	-->
+	<script type="module" src="build/bundle.js" ></script>
+	
+	<!--
+ __   __  ___  
+|  | |  ||   | 
+|  | |  ||   | 
+|  |_|  ||   | 
+|       ||   | 
+|       ||   | 
+|_______||___| 	
 
-		h1 {
-			letter-spacing: 1pt;
-			color: yellow
+	-->
+	<img id="crosshair" src="./files/crosshair.svg" />
+	<script type="module">
+		if(game.isMobile){
+			crosshair.style.display = 'none';
 		}
+	</script>
+	<div id="countdown" >3</div>
+	<iframe id="ui" src="./loading.html"></iframe>
+	<img id="tapHint" class="animate-flicker" src="./files/icons/tapHint.svg" />
+	
+	<!--
+ _______  _______  _______  _______  ___   __    _  _______  _______ 
+|       ||       ||       ||       ||   | |  |  | ||       ||       |
+|  _____||    ___||_     _||_     _||   | |   |_| ||    ___||  _____|
+| |_____ |   |___   |   |    |   |  |   | |       ||   | __ | |_____ 
+|_____  ||    ___|  |   |    |   |  |   | |  _    ||   ||  ||_____  |
+ _____| ||   |___   |   |    |   |  |   | | | |   ||   |_| | _____| |
+|_______||_______|  |___|    |___|  |___| |_|  |__||_______||_______|
+                                                                     
+	-->
+	<img id="settingsImgBlack" src="./files/icons/settings_black.svg" />
+	<img id="settingsImg" src="./files/icons/settings.svg" />
+	<script type="module">
+		settingsImg.addEventListener('pointerdown', (event) => {
+			event.preventDefault();
 
-		h3 {
-			letter-spacing: 0.75pt;
+
+			ui.style.display = 'block';
+			game.pause();
+			ui.contentWindow.showSettings(game,stats);
+		});
+	</script>
+	
+	<!--
+ _______  _______  __   __  __    _  ______  
+|       ||       ||  | |  ||  |  | ||      | 
+|  _____||   _   ||  | |  ||   |_| ||  _    |
+| |_____ |  | |  ||  |_|  ||       || | |   |
+|_____  ||  |_|  ||       ||  _    || |_|   |
+ _____| ||       ||       || | |   ||       |
+|_______||_______||_______||_|  |__||______| 
+	
+
+	-->
+	<img id="soundImgBlack" src="./files/icons/Speaker_off_black.svg" />
+	<img id="soundImg" src="./files/icons/Speaker_off.svg" />
+	<script type="module">
+		export const SOUND = { ON : 1 , OFF : 0};
+		let sound = SOUND.OFF;
+		if(sound == SOUND.ON){
+			soundImg.src = "./files/icons/Speaker_on.svg";
+			soundImgBlack.src = "./files/icons/Speaker_on_black.svg";
 		}
-		p {
-			font-family: Helvetica;
-			/*letter-spacing: 0.5pt;*/
+		if(game)game.sound = sound;
 
-		}
+		soundImg.addEventListener('pointerdown', (event) => {
+			event.preventDefault()
 
-		iframe {
-			border: 0px solid white;
-		}
+			sound = !sound;
+			window.game.sound = sound;
 
-		#main { 
-			width:560px;
-			display: inline-block;
-			text-align: left;
-		}
+			if(sound == SOUND.ON){
+				soundImg.src = "./files/icons/Speaker_on.svg";
+				soundImgBlack.src = "./files/icons/Speaker_on_black.svg";
+			}
+			else{
+				soundImg.src = "./files/icons/Speaker_off.svg";
+				soundImgBlack.src = "./files/icons/Speaker_off_black.svg";
+			}
+		})
+	</script>
 
-		#wrapper {
-			width:100%;
-			text-align: center;
-		}
-	</style>
-</head>
-<body>
-	<div id="wrapper">
-		<div id="main">
-		<h1>Destroy Everything Game</h1>
-		<iframe width="560" height="420" src="https://www.youtube.com/embed/xts6CHBGSRA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-		<p>It's the year 2030 A.D. Because of global warming, the oceans have warmed so much, the heat has awakened ancient creatures frozen for millions of years. The cities by the sea are at constant danger, both from the rising water and angry monsters that come out of it. These monsters are bigger and scarier than anything that has ever been seen before.</p>
+	
 
-		<iframe width="560" height="315" src="https://www.youtube.com/embed/QYglx2hoGS8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-		
-
-<p>Destroy Everything!!!! is a multi-player cooperative game, with two game play options, a monster vs soldiers option as well as, all players on a team of soldiers defending the cities against the monsters. The soldiers get to drive tanks, fly drones, planes, and helicopters. They will use guns, rockets, railguns, grenades, and mines to defend the cities. The player who was the best in defending the city gets to choose to play the monster as a reward.</p>
-
-		<iframe width="560" height="315" src="https://www.youtube.com/embed/bswxuaU0Zpg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<p>The game is set in a very dynamic fully destructible environment. You can shoot and damage anything you see, walk into every building, and explore what's inside. If you want to exit you can just blast your way through a wall of your choice. </p>		
-
-
-
-		
-		
-		<!--
-
-		<h3>New Buildings 02-10-2019 </h3>
-		<iframe width="560" height="315" src="https://www.youtube.com/embed/UqY-GCHoxEY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-		
-		<h3>Gameplay 29-08-2019 demo:</h3>
-		
-
-		<h3>Rampage styled destruction:</h3>
-		<iframe width="560" height="315" src="https://www.youtube.com/embed/fGOQePQqESE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-
-		<h3>Gameplay Teaser:</h3>
-		<iframe width="560" height="315" src="https://www.youtube.com/embed/uYgvi11WuuQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-		<h3>Dynamic day/night cycle:</h3>
-		<iframe width="560" height="315" src="https://www.youtube.com/embed/gQe4WEPJrvA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-		<h3>Building generator in action:</h3>
-		<iframe width="560" height="315" src="https://www.youtube.com/embed/NRS9lKjj8XQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-		</div>
-
-		-->
-	</div>
-
-
-</body>
+	</body>
 </html>

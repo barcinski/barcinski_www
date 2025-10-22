@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo Game UI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="./ui.css">
+    <script src="mobileCheck.js"></script>
+
+    <style>
+
+        #startBtn {
+            visibility: hidden;
+        }
+
+       
+    </style>
+</head>
+<body>
+    <main>
+        <div class="ui-panel">
+            <h2>Time is up!</h2>
+            <button id="startBtn">Try again</button>
+            <p>Press the button above to start the game.</p>
+            
+          
+        </div>
+    </main>
+    <script>
+        startBtn.addEventListener('click', function() {
+            window.parent.startGame()
+            // console.log(window.parent)
+        });
+
+
+        document.body.onload = function () {
+            setTimeout ( () => {startBtn.style.visibility = 'visible'} , 1500);
+        }
+       
+    </script>
+</body>
+</html>
