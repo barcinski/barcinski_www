@@ -11,11 +11,17 @@
             /* top: 50%; */
         }
 
-        #complete_nextBtn , #intro_startBtn , #settings_applyBtn {
+        #complete_nextBtn , #intro_startBtn , #settings_applyBtn , #timeup_multiBtn , #about_startBtn{
             background-color: rgb(13, 134, 255);
         }
 
-        #complete_nextBtn:hover , #intro_startBtn:hover , #settings_applyBtn:hover {
+
+        #complete_nextBtn:hover , 
+        #intro_startBtn:hover , 
+        #settings_applyBtn:hover ,
+        #timeup_multiBtn:hover ,
+        #about_startBtn:hover
+        {
             background: rgb(6, 85, 165);
             text-shadow: black 0px 0px;
             
@@ -29,53 +35,64 @@
 </head>
 <body>
     <main id="main">
+
         <div id="intro" class="ui-panel">
-            <h2>Destroy Everything!</h2>
+            <h2>Destroy Everything !</h2>
             <button id="intro_startBtn">Play Game</button>
             <button id="intro_aboutBtn">About</button>
 
             <h4>
-                You got 15 seconds to Destroy all buildings!
+                You got 15 seconds to destroy all buildings!
             </h4>
             
             
         </div>
+
+
         <div id="timeup" class="ui-panel">
             <h2>Time is up!</h2>
             <h3>Your score is:</h3>
             <h1 id="timeup_score">750</h1>
             <button id="timeup_againBtn">Try again</button>
+            <button id="timeup_multiBtn">Use multitouch</button>
             
         </div>
+
+
         <div id="complete" class="ui-panel">
             <h3>Mission</h3>
             <h3 style="margin-left: -0.2em;">Accomplished!</h3>
             <h4>Your score is:</h4>
             <h1 id="complete_score">1000</h1>
-            <button id="complete_againBtn">Try again</button>
             <button id="complete_nextBtn">Next Level</button>
+            <button id="complete_multiBtn">With multitouch</button>
            
         </div>
+
+
         <div id="about" class="ui-panel">
             <h2>About:</h2>
             <p>Destroy Everything is an online RAGE ROOM type of game.</p>
             <p>Take out your frustration and gain satisfaction from destruction of pretty buildings</p>
             <button id="about_startBtn">Play Game</button> 
         </div>
+
+
+
         <div id="settings" class="ui-panel">
             <form action="../" method="get" target="_parent">
             <h2>Settings:</h2>
             <p>Qaulity: 
-                <select id="quality" name="quality">
+                <select id="qualitySelect" name="quality">
                     <option value="0">LOWEST</option>
                     <option value="1">LOW</option>
                     <option value="2">MEDIUM</option>
                     <option value="3">HIGH</option>
-                    <!-- <option value="4">HIGHEST</option> -->
+                    <option value="4">HIGHEST</option>
                 </select>
             </p>
             <p>Game Type:
-                <select id="mobile" name="mobile">
+                <select id="mobileSelect" name="mobile">
                     <option value="true">MOBILE</option>
                     <option value="false">DESKTOP</option>
                 </select>
@@ -87,7 +104,7 @@
                 </select>
             </p>
             <button id="settings_cancelBtn" onclick="return false">Cancel</button> 
-            <button id="settings_applyBtn">Apply</button> 
+            <button id="settings_applyBtn" onclick="return false">Apply</button> 
            
             </form>
         </div>
@@ -97,19 +114,39 @@
 
     
     <script>
+        let currentPanel = null;
+        
         function startBtnClick(){
             hideOthers();
             window.parent.startGame();
+        }
+
+        function showIntro(){
+            showPanel(intro);
         }
     
         intro_startBtn.addEventListener('click', startBtnClick);
 
         about_startBtn.addEventListener('click', startBtnClick);
+
+        timeup_multiBtn.addEventListener('click', () => {
+            window.parent.game.multitouch = true;
+            startBtnClick();
+        })
         
 
         settings_cancelBtn.addEventListener('click' , () => {
-            settings.style.top = "-50%";
-            intro.style.top = "50%";
+            showIntro();
+        })
+
+        settings_applyBtn.addEventListener('click' , () => {
+            const showStats = parseInt( statsSelect.value );
+            const isMobile = (mobileSelect.value === 'true');
+            const quality = parseInt( qualitySelect.value );       
+
+            window.parent.applySettings( showStats , isMobile , quality )
+
+            showIntro();
         })
 
        
@@ -119,54 +156,81 @@
         intro_aboutBtn.addEventListener('click', function() {
             hideOthers();
             about.style.top = '50%';
+            currentPanel = about;
         });
 
-        complete_againBtn.addEventListener('click', startBtnClick);
+        complete_multiBtn.addEventListener('click' , function() {
+            hideOthers();
+            window.parent.game.multitouch = true;
+            window.parent.nextLevel();
+        });
 
-        complete_nextBtn.addEventListener('click', function() {
+        complete_nextBtn.addEventListener('click' , function() {
             hideOthers();
             window.parent.nextLevel();
         });
 
         function hideOthers(){
-            intro.style.top = '-50%';
-            timeup.style.top = '-50%';
-            complete.style.top = '-50%';
-            about.style.top = '-50%';
-            settings.style.top = '-50%';
+            if(currentPanel != null)currentPanel.style.top = '-50%';
+            
+            currentPanel = null;
         }
 
 
         let scoreTarget = 0;
         let runningScore = 0;
-        function showTimeUp(score){
+
+        function showPanel(panel){
             hideOthers();
-            timeup.style.top = '50%';
+            panel.style.top = '50%';
+            currentPanel = panel;
+        }
+
+        function showTimeUp(score , mobile ){
+            //if(mobile)
+            
+            showPanel(timeup)
 
             scoreTarget = score;
             runningScore = 0;
             requestAnimationFrame(animateScore);
 
 
-            timeup_againBtn.style.visibility = 'hidden'
-            setTimeout ( () => {timeup_againBtn.style.visibility = 'visible'} , 1000);
+           
+
+
+            timeup_againBtn.style.visibility = 'hidden';
+            setTimeout ( () => 
+            {
+                timeup_againBtn.style.visibility = 'visible';
+            } , 750 );
+
+            if(!mobile){
+                timeup_multiBtn.style.display = 'none';
+                return;
+            }
+
+            timeup_multiBtn.style.display = 'inline-block'
+            timeup_multiBtn.style.visibility = 'hidden';
+            setTimeout ( () => 
+            {
+                timeup_multiBtn.style.visibility = 'visible';
+            } , 1250 );
         }
 
         function showSettings(game,stats){
-            hideOthers();
-            settings.style.top = '50%';
+            showPanel(settings);
 
-            for(let i = 0 ; i < quality.options.length ; i++){
-                if(quality.options[i].value == game.quality){
-                    quality.selectedIndex = i;
+            for(let i = 0 ; i < qualitySelect.options.length ; i++){
+                if(qualitySelect.options[i].value == game.quality){
+                    qualitySelect.selectedIndex = i;
                 }
             }
-            //quality.selectedIndex
-
+           
             if(game.isMobile == false){
-                mobile.selectedIndex = 1;
+                mobileSelect.selectedIndex = 1;
             }
-            console.log(stats)
+          
            if(stats){
                statsSelect.selectedIndex = 1;
             }
@@ -183,29 +247,34 @@
             complete_score.innerText = Math.round(runningScore) ;
         }
 
-        function showMissionComplete(score = 1000){
-            hideOthers();
-
+        function showMissionComplete(score = 1000 , mobile){
+            showPanel(complete);
 
             scoreTarget = score;
             runningScore = 0;
             requestAnimationFrame(animateScore);
             //complete_score.innerText = score ;
 
-            complete.style.top = '50%';
-
-            complete_againBtn.style.visibility = 'hidden'
-            setTimeout ( () => {complete_againBtn.style.visibility = 'visible'} , 1500);
-
             complete_nextBtn.style.visibility = 'hidden'
             setTimeout ( () => {complete_nextBtn.style.visibility = 'visible'} , 1000);
+
+            
+
+            if(!mobile){
+                complete_multiBtn.style.display = 'none';
+                return;
+            }
+
+            complete_multiBtn.style.visibility = 'hidden'
+            setTimeout ( () => {complete_multiBtn.style.visibility = 'visible'} , 1500);
+
+            
         }
 
         function windowResized(e){
             
             let aspect = window.innerWidth / window.innerHeight;
-            console.log(window.devicePixelRatio)
-
+            
          
             if(aspect>1.0   )
                 main.style.zoom = Math.min(window.innerHeight / 325 , 1.25) ;
@@ -217,7 +286,8 @@
 
         window.addEventListener('resize' , windowResized);
         document.body.onload = () => {
-            intro.style.top = "50%"
+            showIntro();
+            // showMissionComplete(1111 , window.parent.game.isMobile);
             windowResized();
         };
     </script>
