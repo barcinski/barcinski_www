@@ -26,7 +26,11 @@ body {
 }
 
 a , a:visited {
-  color: #00d8f5;
+  color: #fafaa5;
+}
+
+a:hover {
+  color: #ffff00;
 }
 
 h1 {
