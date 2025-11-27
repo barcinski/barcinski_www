@@ -25,6 +25,10 @@ body {
     font-style: normal;
 }
 
+a , a:visited {
+  color: #00d8f5;
+}
+
 h1 {
   margin: 0.3em;
   font-size: 4em;
@@ -46,6 +50,9 @@ h4 {
     font-size: 1.8em;
   }
 }
+
+
+
 
 
 
