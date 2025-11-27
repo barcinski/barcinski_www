@@ -65,7 +65,7 @@ main {
 
 .ui-panel {
     position: absolute;
-    top:-50%;
+    top:-75%;
     transform: translateY(-50%);
 
     background: rgba(255, 79, 202, 0.8);
