@@ -29,6 +29,10 @@ a , a:visited {
   color: #fafaa5;
 }
 
+#credits p{
+  margin: .4em;
+}
+
 a:hover {
   color: #ffff00;
 }
