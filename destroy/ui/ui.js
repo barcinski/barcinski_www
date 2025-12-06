@@ -40,8 +40,9 @@ settings_applyBtn.addEventListener('click' , () => {
     const showStats = parseInt( statsSelect.value );
     const isMobile = (mobileSelect.value === 'true');
     const quality = parseInt( qualitySelect.value );       
+    const ao = parseInt( aoSelect.value );       
 
-    window.parent.applySettings( showStats , isMobile , quality )
+    window.parent.applySettings( showStats , isMobile , quality , ao )
 
     showIntro();
 })
@@ -91,16 +92,13 @@ function showTimeUp(score , mobile ){
     requestAnimationFrame(animateScore);
 
 
-    
-
-
     timeup_againBtn.style.visibility = 'hidden';
     setTimeout ( () => 
     {
         timeup_againBtn.style.visibility = 'visible';
     } , 750 );
 
-    if(!mobile){
+    if(!mobile || window.navigator.maxTouchPoints <= 1){
         timeup_multiBtn.style.display = 'none';
         return;
     }
@@ -119,6 +117,12 @@ function showSettings(game,stats){
     for(let i = 0 ; i < qualitySelect.options.length ; i++){
         if(qualitySelect.options[i].value == game.quality){
             qualitySelect.selectedIndex = i;
+        }
+    }
+
+    for(let i = 0 ; i < aoSelect.options.length ; i++){
+        if(aoSelect.options[i].value == game.ao){
+            aoSelect.selectedIndex = i;
         }
     }
     
@@ -155,7 +159,7 @@ function showMissionComplete(score = 1000 , mobile){
 
     
 
-    if(!mobile){
+    if(!mobile || window.navigator.maxTouchPoints <= 1){
         complete_multiBtn.style.display = 'none';
         return;
     }
@@ -182,6 +186,7 @@ function windowResized(e){
 window.addEventListener('resize' , windowResized);
 document.body.onload = () => {
     showIntro();
+    // showSettings(window.parent.game,window.parent.stats)
     // showMissionComplete(1111 , window.parent.game.isMobile);
     windowResized();
 };

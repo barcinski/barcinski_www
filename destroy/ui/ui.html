@@ -31,8 +31,13 @@
             
         }
 
-        p {
-            display: grid;
+
+         #settings p {
+            /* min-width: 6em; */
+           /* float: inline-end; */
+           width: 45%;
+           display: inline-block;
+           margin: 0.2em;
         }
     </style>
   
@@ -106,6 +111,21 @@
                     <option value="2">MEDIUM</option>
                     <option value="3">HIGH</option>
                     <option value="4">HIGHEST</option>
+                </select>
+            </p>
+            <p>Ambient Occlusion: 
+                <select id="aoSelect" name="ao"  title="Shading technique that creates subtle contact shadows which add realism by darkening corners and crevices.">
+
+                    <option value="0" title="No AO (1 FULL RENDER PASS)">OFF</option>
+
+                    <!--<option value="1" title="Transparancies are not handeled well 
+Particle effects are therefore disabled and there is no AO behind glass
+(1 FULL RENDER PASS + AO PASS)">LOWEST</option>-->
+
+                    <option value="2">LOW</option>
+                    <option value="3">MEDIUM</option>
+                    <option value="4">HIGH</option>
+                    <!-- <option value="5">HIGHEST</option> -->
                 </select>
             </p>
             <p>Game Type:
