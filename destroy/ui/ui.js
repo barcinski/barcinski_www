@@ -31,6 +31,11 @@ timeup_multiBtn.addEventListener('click', () => {
     startBtnClick();
 })
 
+timeup_rocketsBtn.addEventListener('click', () => {
+    window.parent.game.useRockets = true;
+    startBtnClick();
+})
+
 
 settings_cancelBtn.addEventListener('click' , () => {
     showIntro();
@@ -90,6 +95,14 @@ function showTimeUp(score , mobile ){
     scoreTarget = score;
     runningScore = 0;
     requestAnimationFrame(animateScore);
+
+    timeup_rocketsBtn.style.visibility = 'hidden';
+    if(!mobile) setTimeout ( () => 
+    {
+        timeup_rocketsBtn.style.visibility = 'visible';
+    } , 1250);
+    else 
+        timeup_rocketsBtn.style.display = 'none';
 
 
     timeup_againBtn.style.visibility = 'hidden';
@@ -158,6 +171,8 @@ function showMissionComplete(score = 1000 , mobile){
     setTimeout ( () => {complete_nextBtn.style.visibility = 'visible'} , 1000);
 
     
+     complete_multiBtn.style.display = 'none';
+     return;// the idea is to remove this button from this panel 
 
     if(!mobile || window.navigator.maxTouchPoints <= 1){
         complete_multiBtn.style.display = 'none';
@@ -186,7 +201,8 @@ function windowResized(e){
 window.addEventListener('resize' , windowResized);
 document.body.onload = () => {
     showIntro();
-    // showSettings(window.parent.game,window.parent.stats)
-    // showMissionComplete(1111 , window.parent.game.isMobile);
+    // showSettings(window.parent.game,window.parent.stats);
+    //showTimeUp(1111 , window.parent.game.isMobile)
+   //  showMissionComplete(1111 , window.parent.game.isMobile);
     windowResized();
 };

@@ -146,7 +146,7 @@ h4 {
   }
 
   .ui-panel {
-    width:20em;
+    width:22em;
     padding-top:0.5em;
     padding-bottom: 0.5em;
   }
@@ -162,5 +162,6 @@ h4 {
 
   #settings p {
     /* display: table-cell; */
+    width: 42%;
   }
 }
