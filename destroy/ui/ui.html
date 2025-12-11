@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Demo Game UI</title>
+    <title>Destroy Everything UI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="./ui.css">
   
@@ -50,7 +50,7 @@
     <main id="main">
 
         <div id="intro" class="ui-panel">
-            <h2>Destroy Everything !</h2>
+            <h2>Destroy Everything!</h2>
             <button id="intro_startBtn">Play Game</button>
             <button id="intro_aboutBtn">About</button>
 
@@ -64,11 +64,13 @@
 
         <div id="timeup" class="ui-panel">
             <h2>Time is up!</h2>
-            <h3>Your score is:</h3>
+            <h4>Your score:</h4>
             <h1 id="timeup_score">750</h1>
+            <h4>Total Score:</h4>
+            <h2 id="timeup_total">1750</h2>
             <button id="timeup_againBtn">Try again</button>
-            <button id="timeup_multiBtn">Use multitouch</button>
             <button id="timeup_rocketsBtn">Use rockets</button>
+            <button id="timeup_multiBtn">Use multitouch</button>
             
         </div>
 
@@ -78,6 +80,8 @@
             <h3 style="margin-left: -0.2em;">Accomplished!</h3>
             <h4>Your score is:</h4>
             <h1 id="complete_score">1000</h1>
+            <h4>Total Score:</h4>
+            <h2 id="complete_total">1750</h2>
             <button id="complete_nextBtn">Next Level</button>
             <button id="complete_multiBtn">With multitouch</button>
            

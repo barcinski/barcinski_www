@@ -52,11 +52,23 @@ h4 {
   font-size: 1.1em;
 }
 
+
 @media (max-aspect-ratio: 1.0) {
   #complete h3 {
     margin: 0.1em;
     font-size: 1.8em;
   }
+
+  #timeup_score {
+    line-height: .7em
+  }
+  
+  #timeup_rocketsBtn {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+ 
 }
 
 
@@ -113,9 +125,18 @@ main {
 }
 
 @media (min-aspect-ratio: 1.0) {
+#timeup_multiBtn {
+  margin-top: 0;
+    margin-bottom: 0;
+}
+
+.foo#timeup {
+  width: 29em;
+  /* This is triggert from javascript now */
+}
 
 
-  h2 , h3 {
+h2 , h3 {
   /* margin: 0.0em; */
   font-size: 1.5em;
 }
@@ -132,6 +153,8 @@ h4 {
   margin: 0.1em;
   font-size: 1.2em;
 }
+
+
 
   #complete   {
     padding-bottom: 0.2em;

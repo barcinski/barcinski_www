@@ -78,6 +78,7 @@ function hideOthers(){
 }
 
 
+let _startScore = 0;
 let scoreTarget = 0;
 let runningScore = 0;
 
@@ -87,22 +88,25 @@ function showPanel(panel){
     currentPanel = panel;
 }
 
-function showTimeUp(score , mobile ){
+function showTimeUp(score = 0 , startScore  = 0 , mobile ){
     //if(mobile)
     
     showPanel(timeup)
+    timeup_total.innerText =   startScore;
 
-    scoreTarget = score;
+    _startScore = startScore;
+    scoreTarget = score ;
     runningScore = 0;
     requestAnimationFrame(animateScore);
 
     timeup_rocketsBtn.style.visibility = 'hidden';
-    if(!mobile) setTimeout ( () => 
+   //if(!mobile) 
+    setTimeout ( () => 
     {
         timeup_rocketsBtn.style.visibility = 'visible';
     } , 1250);
-    else 
-        timeup_rocketsBtn.style.display = 'none';
+    //else 
+    //    timeup_rocketsBtn.style.display = 'none';
 
 
     timeup_againBtn.style.visibility = 'hidden';
@@ -111,6 +115,9 @@ function showTimeUp(score , mobile ){
         timeup_againBtn.style.visibility = 'visible';
     } , 750 );
 
+    //timeup_multiBtn.style.display = 'none';
+    //return;
+    //the idea here isto get rid of the multituouch, replaced by rockets
     if(!mobile || window.navigator.maxTouchPoints <= 1){
         timeup_multiBtn.style.display = 'none';
         return;
@@ -121,7 +128,7 @@ function showTimeUp(score , mobile ){
     setTimeout ( () => 
     {
         timeup_multiBtn.style.visibility = 'visible';
-    } , 1250 );
+    } , 1650 );
 }
 
 function showSettings(game,stats){
@@ -155,14 +162,19 @@ function animateScore(){
         //runningScore++;
         requestAnimationFrame(animateScore);
     }
-    timeup_score.innerText = Math.round(runningScore) ;
-    complete_score.innerText = Math.round(runningScore) ;
+    let val = Math.round(runningScore) 
+    timeup_score.innerText = val;
+    complete_score.innerText = val;
+    timeup_total.innerText =   _startScore + val;
+    complete_total.innerText =   _startScore + val;
 }
 
-function showMissionComplete(score = 1000 , mobile){
+function showMissionComplete(score = 1000 , startScore = 0 , mobile){
     showPanel(complete);
 
-    scoreTarget = score;
+    complete_total.innerText =   startScore;
+     _startScore = startScore;
+    scoreTarget = score ;
     runningScore = 0;
     requestAnimationFrame(animateScore);
     //complete_score.innerText = score ;
@@ -200,9 +212,12 @@ function windowResized(e){
 
 window.addEventListener('resize' , windowResized);
 document.body.onload = () => {
+    if(window.parent.game.isMobile && window.navigator.maxTouchPoints > 1)
+        timeup.className = "ui-panel foo"
+    
     showIntro();
     // showSettings(window.parent.game,window.parent.stats);
-    //showTimeUp(1111 , window.parent.game.isMobile)
-   //  showMissionComplete(1111 , window.parent.game.isMobile);
+    //showTimeUp(1011 , 0,  window.parent.game.isMobile)
+    //  showMissionComplete(1111, 1013 , window.parent.game.isMobile);
     windowResized();
 };
