@@ -99,7 +99,7 @@ main {
     text-align: center;
 
     /* display: none; */
-    transition: 0.5s top ease;
+    transition: 0.7s top ease;
 }
 .ui-panel button {
     font-family: 'Cooper Black', sans-serif;

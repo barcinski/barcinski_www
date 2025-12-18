@@ -1,4 +1,23 @@
 let currentPanel = null;
+let highScores = [ 
+    { name:"Frank" , score:1000 , level:1 } , 
+    { name:"Rinske" , score:5000 , level:5 } , 
+    { name:"Cem" , score:4000 , level:4} ,
+    { name:"Mark" , score:3000 , level:3} ,
+    { name:"George" , score:2000  , level:2} ,
+]; //TODO move to Game.js
+Array.prototype.sortOn = function() {
+    var b = this.slice();
+    if (!arguments.length) return b.sort();
+    var e = Array.prototype.slice.call(arguments);
+    return b.sort(function(b, g) {
+        for (var h = e.slice(), c = h.shift(); b[c] == g[c] && h.length;) c = h.shift();
+        return b[c] == g[c] ? 0 : b[c] < g[c] ? 1 : -1
+    })
+};
+highScores = highScores.sortOn("score");
+
+
         
 function startBtnClick(){
     hideOthers();
@@ -11,12 +30,13 @@ function showIntro(){
 
 intro_startBtn.addEventListener('click', startBtnClick);
 
-about_introBtn.addEventListener('click', () => {
-    showIntro();
+about_playBtn.addEventListener('click', () => {
+    //showIntro();
+    startBtnClick();
 })
 
-about_creditsBtn.addEventListener('click' , () => {
-    showPanel(credits)
+about_highscoresBtn.addEventListener('click' , () => {
+    showHighscores(false);
 })
 
 credits_aboutBtn.addEventListener('click' , () => {
@@ -34,6 +54,16 @@ timeup_multiBtn.addEventListener('click', () => {
 timeup_rocketsBtn.addEventListener('click', () => {
     window.parent.game.useRockets = true;
     startBtnClick();
+})
+
+highscores_resume.addEventListener('click', () => {
+    hideOthers();
+    window.parent.resumeGame();
+})
+
+highscores_newgame.addEventListener('click', () => {
+    hideOthers();
+    window.parent.newGame();
 })
 
 
@@ -60,10 +90,8 @@ intro_aboutBtn.addEventListener('click', function() {
     showPanel(about)
 });
 
-complete_multiBtn.addEventListener('click' , function() {
-    hideOthers();
-    window.parent.game.multitouch = true;
-    window.parent.nextLevel();
+complete_highscoresBtn.addEventListener('click' , function() {
+    showHighscores(true);
 });
 
 complete_nextBtn.addEventListener('click' , function() {
@@ -86,6 +114,28 @@ function showPanel(panel){
     hideOthers();
     panel.style.top = '50%';
     currentPanel = panel;
+}
+
+function showHighscores(showResume){
+    showPanel(highscores)
+
+    jaja.innerHTML = "";
+    
+
+    for(let i = 0 ; i < highScores.length ; i++)
+    {
+        let row = jaja.insertRow();
+        
+        row.insertCell(0).innerHTML = i + 1;
+        row.insertCell(1).innerHTML = highScores[i].name;
+        row.insertCell(2).innerHTML = highScores[i].level;
+        row.insertCell(3).innerHTML = highScores[i].score;
+    }
+
+
+    //if(showResume)highscores_resume.style.display = 'inline-block';
+    //else highscores_resume.style.display = 'none';
+    
 }
 
 function showTimeUp(score = 0 , startScore  = 0 , mobile ){
@@ -169,9 +219,23 @@ function animateScore(){
     complete_total.innerText =   _startScore + val;
 }
 
-function showMissionComplete(score = 1000 , startScore = 0 , mobile){
-    showPanel(complete);
+function checkHighScores(score)
+{
+    for(let i = 0 ; i < highScores.length ; i++){
+        if(score >= highScores[i].score){
+            let lvl = window.parent.game.currentLevel;
+            highScores.splice(i , 0 , { name : "You" , level:lvl , score:score} )
+            break;
+        }
+    }
 
+    if(highScores.length > 5)highScores.length = 5;
+}
+
+function showMissionComplete(score = 1000 , startScore = 0 , mobile)
+{
+    showPanel(complete);
+    checkHighScores(score + startScore)
     complete_total.innerText =   startScore;
      _startScore = startScore;
     scoreTarget = score ;
@@ -182,17 +246,9 @@ function showMissionComplete(score = 1000 , startScore = 0 , mobile){
     complete_nextBtn.style.visibility = 'hidden'
     setTimeout ( () => {complete_nextBtn.style.visibility = 'visible'} , 1000);
 
-    
-     complete_multiBtn.style.display = 'none';
-     return;// the idea is to remove this button from this panel 
 
-    if(!mobile || window.navigator.maxTouchPoints <= 1){
-        complete_multiBtn.style.display = 'none';
-        return;
-    }
-
-    complete_multiBtn.style.visibility = 'hidden'
-    setTimeout ( () => {complete_multiBtn.style.visibility = 'visible'} , 1500);
+    complete_highscoresBtn.style.visibility = 'hidden'
+    setTimeout ( () => {complete_highscoresBtn.style.visibility = 'visible'} , 1500);
 
     
 }
@@ -214,10 +270,6 @@ window.addEventListener('resize' , windowResized);
 document.body.onload = () => {
     if(window.parent.game.isMobile && window.navigator.maxTouchPoints > 1)
         timeup.className = "ui-panel foo"
-    
     showIntro();
-    // showSettings(window.parent.game,window.parent.stats);
-    //showTimeUp(1011 , 0,  window.parent.game.isMobile)
-    //  showMissionComplete(1111, 1013 , window.parent.game.isMobile);
     windowResized();
 };

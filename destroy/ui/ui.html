@@ -13,8 +13,9 @@
         #settings_applyBtn , 
         #timeup_multiBtn , 
         #timeup_rocketsBtn , 
-        #about_introBtn ,
-        #credits_introBtn
+        #about_playBtn ,
+        #credits_introBtn , 
+        #highscores_resume
         {
             background-color: rgb(13, 134, 255);
         }
@@ -25,8 +26,9 @@
         #settings_applyBtn:hover ,
         #timeup_multiBtn:hover ,
         #timeup_rocketsBtn:hover ,
-        #about_introBtn:hover ,
-        #credits_introBtn:hover
+        #about_playBtn:hover ,
+        #credits_introBtn:hover , 
+        #highscores_resume:hover
         {
             background: rgb(6, 85, 165);
             text-shadow: black 0px 0px;
@@ -74,6 +76,55 @@
             
         </div>
 
+        <div id="highscores" class="ui-panel">
+            <h2>High Scores</h2>
+            <table align="center" width="100%">
+                <thead>
+                <tr>
+                    <td>Rank:</td>
+                    <td>Name:</td>
+                    <td>lvl:</td>
+                    <td>Score:</td>
+                </tr>
+                </thead>
+                <tbody id="jaja">
+                <tr>
+                    <td>1.</td>
+                    <td>Rins</td>
+                    <td>5</td>
+                    <td>5000</td>
+                </tr>
+                <tr>
+                    <td>2.</td>
+                    <td>Mark</td>
+                    <td>4</td>
+                    <td>4000</td>
+                </tr>
+                <tr>
+                    <td>3.</td>
+                    <td>Cem</td>
+                    <td>3</td>
+                    <td>3000</td>
+                </tr>
+                <tr>
+                    <td>4.</td>
+                    <td>Marissa</td>
+                    <td>2</td>
+                    <td>2000</td>
+                </tr>
+                <tr>
+                    <td>5.</td>
+                    <td>Frank</td>
+                    <td>1</td>
+                    <td>1000</td>
+                </tr>
+                </tbody>
+            </table>
+            <button id="highscores_resume">Resume</button>
+            <button id="highscores_newgame">New Game</button>
+          
+        </div>
+
 
         <div id="complete" class="ui-panel">
             <h3>Mission</h3>
@@ -83,7 +134,7 @@
             <h4>Total Score:</h4>
             <h2 id="complete_total">1750</h2>
             <button id="complete_nextBtn">Next Level</button>
-            <button id="complete_multiBtn">With multitouch</button>
+            <button id="complete_highscoresBtn">High Scores</button>
            
         </div>
 
@@ -92,9 +143,11 @@
             <h2>About:</h2>
             <p>Destroy Everything is an online RAGEROOM game. Take out your anger to calm down.</p>
             <p style="display: inline-block;">join our <a href="https://discord.gg/59HuuVA5aM" target="_blank">discord</a> or buy us a <a href="https://buymeacoffee.com/markbarcinski" target="_blank">coffee</a></p>
-            <button id="about_creditsBtn">Credits</button> 
-            <button id="about_introBtn">Intro</button> 
+            <button id="about_highscoresBtn">High Scores</button> 
+            <button id="about_playBtn">Play Game</button> 
         </div>
+
+        
 
 
 
