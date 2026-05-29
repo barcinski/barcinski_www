@@ -20,7 +20,7 @@ a {
 }
 
 a.ico {text-decoration:none;}
-a.txt { margin: 10px;}
+a.txt { margin: 10px;text-transform: lowercase;}
 a.txt:hover {color: #000;} 
 
     
